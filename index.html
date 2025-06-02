@@ -1,180 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>Portfolio</title>
-  <link rel="stylesheet" href="css/css.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.14.0/devicon.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script src="JS/index.js"></script>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dev-grid-folio</title>
+    <meta name="description" content="Lovable Generated Project" />
+    <meta name="author" content="Lovable" />
 
-<body onload="onLo()">
-  <header>
-    <nav class="navbar sticky">
-      <div class="content">
-        <div class="logo">
-          <a href="index.html">My Portfolio</a>
-        </div>
-        <ul class="menu-list">
-          <div class="icon cancel-btn">
-            <i class="fas fa-times"></i>
-          </div>
-          <li><a href="#about" >About Me</a></li>
-          <li><a href="#projects" >Projects</a></li>
-          <li><a href="#contact" >Contact</a></li>
-        </ul>
-        <div class="icon menu-btn">
-          <i class="fas fa-bars" onclick="navb()"></i>
-        </div>
-      </div>
-    </nav>
-  </header>
- 
-  <section id="hero" style="padding-top: 80px; margin-top: 0px;">
-    <div class="hero-text">
-      <h2>Hello, I'm Soumyadeep Shome</h2>
-      <h3>A Software Developer</h3>
-    </div>
-    <div class="hero-image">
-      <img src="Images/profile.jpg" alt="Your photo">
-    </div>
-    <div class="hero-content">
-        <h1>Welcome to my portfolio</h1>
-    </div>
-  </section>
+    <meta property="og:title" content="dev-grid-folio" />
+    <meta property="og:description" content="Lovable Generated Project" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
-  <section id="about">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <h2>About Me</h2>
-          <p>Hi there! I'm Soumyadeep Shome, a software engineer with a passion for innovation. With a broad skill set in various programming languages and technologies, I love taking on complex challenges and delivering scalable solutions that exceed expectations. Let's work together to create something amazing!</p>
-          <ul class="social-icons">
-            <li><a href="https://github.com/soumya-shome" target="_blank"><i class="fab fa-github fa-3x" aria-hidden="true"></i></a></li>
-            <li><a href="https://www.linkedin.com/in/soumya-shome/" target="_blank"><i class="fab fa-linkedin fa-3x"></i></a></li>
-            <li><a href="https://www.instagram.com/techie499/" target="_blank"><i class="fab fa-instagram fa-3x"></i></a></li>
-            <li><a href="https://www.youtube.com/c/Techie499yt" target="_blank"><i class="fab fa-youtube fa-3x"></i></a></li>
-            <li><a href="https://twitter.com/username" target="_blank"><i class="fab fa-twitter fa-3x"></i></a></li>
-            <li><a href="https://www.hackerrank.com/soumya_shome" target="_blank"><i class="fab fa-hackerrank fa-3x"></i></a></li>
-            <li><a href="https://www.facebook.com/techie499" target="_blank"><i class="fab fa-facebook fa-3x"></i></a></li>
-          </ul>
-        </div>  
-        <div class="col-md-6">
-          <h2>Skills</h2>
-          <ul class="coding-icons">
-            <li>
-              <div><i class="fab fa-java"></i><span>Java</span></div>
-            </li>
-            <li>
-              <div><i class="fab fa-python"></i><span>Python</span></div>
-            </li>
-            <li>
-              <div><i class="devicon-c-plain"></i><span>C</span></div>
-            </li>
-            <li>
-              <div><i class="devicon-cplusplus-plain"></i><span>C++</span></div>
-            </li>
-            <li>
-              <div><i class="fab fa-php"></i><span>PHP</span></div>
-            </li>
-            <li>
-              <div><i class="fab fa-html5"></i><span>HTML</span></div>
-            </li>
-            <li>
-              <div><i class="fab fa-css3"></i><span>CSS</span></div>
-            </li>
-            <li>
-              <div><i class="fab fa-js"></i><span>JavaScript</span></div>
-            </li>
-            <li>
-              <div><i class="devicon-arduino-plain"></i><span>Arduino</span></div>
-            </li>
-          </ul>
-        </div>
-        <div class="cert-btn col-md-6">
-          <a href="https://drive.google.com/file/d/1fkzhVEgEtqYStUOF0Z1wV2ZvUotjsgaw/view?usp=share_link" class="btn btn-primary">View my Resume</a>
-         
-          <a href="certificate.html" class="btn btn-primary">View my Certifications</a>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <section id="projects" class="section">
-    <div class="container">
-      <h2>Software Projects</h2>
-      <ul class="projects-grid">
-        <li>
-          <div class="project-tile">
-            <img src="Images/2024-02-25_01-54-36.jpg" alt="ShomeTech">
-            <h3>Calculator</h3>
-            <p>The Basic Java Calculator is a beginner-friendly project that helps you build a simple calculator using Java. This calculator lets users add, subtract, multiply, and divide numbers effortlessly. </p>
-            <br/><a href="https://www.techie499.com/2018/12/shometech-know-your-number.html"><b>View More</b></a>
-          </div>
-        </li>
-        <li>
-          <div class="project-tile">
-            <img src="Images/project3.png" alt="ShomeTech">
-            <h3>ShomeTech</h3>
-            <p>The App or Tool will help you to deal with the different Types of numbers you might deal with in the programming world.</p>
-            <br/><a href="https://www.techie499.com/2018/12/shometech-know-your-number.html"><b>View More</b></a>
-          </div>
-        </li>
-        <li>
-          <div class="project-tile">
-            <img src="Images/Screenshot 2024-02-25 015716.png" alt="Online Exam Center">
-            <h3>Online Exam Center</h3>
-            <p>Description</p>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </section>
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@lovable_dev" />
+    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+  </head>
 
-  <section id="projects" class="section">
-    <div class="container">
-      <h2>Electronics Projects</h2>
-      <ul class="projects-grid">
-        <li>
-          <div class="project-tile">
-            <img src="Images/project.png" alt="RFID Door Lock">
-            <h3>RFID Door Lock</h3>
-            <p>RFID Door Lock is a low-cost, secure, and easy-to-install DIY project using an Arduino board and an RFID reader that enables users to control door locks by reading RFID tags.</p>
-            <br/><a href="https://www.techie499.com/2023/03/RFIDDoorLock.html"><b>View More</b></a>
-          </div>
-        </li>
-        <li>
-          <div class="project-tile">
-            <img src="Images/project2.png" alt="IoT Mini Clock">
-            <h3>IoT Mini Clock</h3>
-            <p>A mini clock project that utilizes ESP01 and TM1637 Display to display Internet Time in a compact and convenient manner.</p>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="contact">
-    <h2>Contact</h2>
-    <div class="contact-form">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="message">Message</label>
-        <textarea id="message" name="message" required></textarea>
-        
-        <button onclick="sendMail()">Send Message</button>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2022 Soumyadeep Shome. All rights reserved.</p>
-  </footer>
-</body>
+  <body>
+    <div id="root"></div>
+    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
