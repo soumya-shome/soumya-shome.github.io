@@ -445,14 +445,60 @@ function npInitScrollTopButton() {
   btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 }
 
+/* Relays the contact form through FormSubmit.co (https://formsubmit.co) —
+   no Gmail OAuth involved; FormSubmit emails CONTACT_EMAIL from its own
+   infrastructure. The first-ever submission to a new address triggers a
+   one-time confirmation email from FormSubmit that must be clicked before
+   delivery actually starts — expect the first real test to "succeed" here
+   but not arrive until that link is clicked. */
 function npInitContactForm() {
   const form = document.getElementById("np-contact-form");
   if (!form) return;
+
+  const CONTACT_EMAIL = "soumyadeepshome99@gmail.com";
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    console.log("Form submitted");
-    alert("Thank you for your message! I'll get back to you soon.");
-    form.reset();
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalLabel = submitBtn.textContent;
+
+    const name = document.getElementById("np-name").value;
+    const email = document.getElementById("np-email").value;
+    const subject = document.getElementById("np-subject").value;
+    const message = document.getElementById("np-message").value;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending...";
+
+    fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        name,
+        email,
+        subject,
+        message,
+        _subject: `Portfolio contact: ${subject}`,
+        _template: "table",
+        _captcha: "false",
+      }),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error(`FormSubmit responded with ${res.status}`);
+        return res.json();
+      })
+      .then(() => {
+        alert("Thank you for your message! I'll get back to you soon.");
+        form.reset();
+      })
+      .catch((err) => {
+        console.error("FormSubmit send failed:", err);
+        alert("Sorry, something went wrong sending your message. Please try emailing me directly instead.");
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalLabel;
+      });
   });
 }
 
