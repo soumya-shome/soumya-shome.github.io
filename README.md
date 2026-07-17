@@ -1,73 +1,28 @@
-# Welcome to your Lovable project
+# Portfolio
 
-## Project info
+Soumyadeep Shome's personal portfolio site — plain HTML, CSS, and JavaScript, no build step required.
 
-**URL**: https://lovable.dev/projects/24887d54-55ed-45b1-b1b4-8943529cdcce
+## Structure
 
-## How can I edit this code?
+- [index.html](index.html) — the homepage (hero, about, skills, projects, contact, footer)
+- [certificate.html](certificate.html) — certifications page
+- [myhub/index.html](myhub/index.html) — personal link hub, reachable at `/myhub/`: cards that redirect out to other project sites you maintain. Not linked from the main nav (kept out of search indexing via `robots: noindex`) — bookmark it directly. Edit the `hubLinks` array in `JS/index.js` to add/remove entries.
+- [css/css.css](css/css.css) — all styles (the homepage's rules are scoped under `.np-page` / `np-` prefixed classes at the bottom of the file so they don't collide with `certificate.html`'s styles)
+- [JS/index.js](JS/index.js) — all scripts (homepage behavior is in `np`-prefixed functions, hub page behavior in `hub`-prefixed functions, at the bottom of the file)
+- [Images/](Images/) — image assets used across the site
 
-There are several ways of editing your application.
+## Running locally
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/24887d54-55ed-45b1-b1b4-8943529cdcce) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+No install, no build. Just serve the repo root with any static file server, e.g.:
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+python3 -m http.server 8080
 ```
 
-**Edit a file directly in GitHub**
+Then open `http://localhost:8080/`.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Deployment
 
-**Use GitHub Codespaces**
+Pushes to `main` that touch `index.html`, `certificate.html`, `myhub/`, `css/`, `JS/`, `Images/`, or `favicon.ico` are deployed to GitHub Pages automatically via [.github/workflows/deploy-pages.yml](.github/workflows/deploy-pages.yml). In the repo's Settings → Pages, the source must be set to **GitHub Actions**.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/24887d54-55ed-45b1-b1b4-8943529cdcce) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+(Since everything now lives at the repo root, classic "Deploy from a branch → main → / (root)" would also work without any workflow at all, if you'd rather skip Actions entirely.)

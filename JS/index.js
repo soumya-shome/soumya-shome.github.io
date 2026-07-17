@@ -54,7 +54,7 @@ function sendMail(){
     }
 
 /* =========================================================================
-   New Portfolio (static/index.html) — converted from the React homepage.
+   New Portfolio (index.html) — converted from the React homepage.
    All globals here are prefixed "np" so they never collide with navb(),
    sendMail(), onLo() above.
    ========================================================================= */
@@ -76,7 +76,7 @@ const npProjects = [
     id: 1,
     title: "Calculator",
     description: "The Basic Java Calculator is a beginner-friendly project that helps you build a simple calculator using Java. This calculator lets users add, subtract, multiply, and divide numbers effortlessly. ",
-    image: "../Images/2024-02-25_01-54-36.jpg",
+    image: "Images/2024-02-25_01-54-36.jpg",
     tags: ["React", "Node.js", "MongoDB", "Stripe"],
     demoUrl: "#",
     repoUrl: "#",
@@ -87,7 +87,7 @@ const npProjects = [
     id: 2,
     title: "ShomeTech",
     description: "The App or Tool will help you to deal with the different Types of numbers you might deal with in the programming world.",
-    image: "../Images/project3.png",
+    image: "Images/project3.png",
     tags: ["Java"],
     demoUrl: "https://www.techie499.com/2018/12/shometech-know-your-number.html",
     repoUrl: "https://github.com",
@@ -98,7 +98,7 @@ const npProjects = [
     id: 3,
     title: "RFID Door Lock",
     description: "RFID Door Lock is a low-cost, secure, and easy-to-install DIY project using an Arduino board and an RFID reader that enables users to control door locks by reading RFID tags.",
-    image: "../Images/project.png",
+    image: "Images/project.png",
     tags: ["Arduino", "Raspberry Pi", "MQTT"],
     demoUrl: "https://example.com",
     repoUrl: "https://github.com",
@@ -109,7 +109,7 @@ const npProjects = [
     id: 4,
     title: "IoT Mini Clock",
     description: "A mini clock project that utilizes ESP01 and TM1637 Display to display Internet Time in a compact and convenient manner.",
-    image: "../Images/project2.png",
+    image: "Images/project2.png",
     tags: ["ESP32", "IoT"],
     demoUrl: "https://example.com",
     repoUrl: "https://github.com",
@@ -233,7 +233,7 @@ function npRenderProjects(filter) {
   if (!track) return;
   const filtered = filter === "all" ? npProjects : npProjects.filter((p) => p.category === filter);
   track.innerHTML = filtered.map(npProjectCard).join("");
-  track.scrollTo({ left: 0 });
+  npCarouselOnContentChange();
 }
 
 function npInitProjectsFilter() {
@@ -248,15 +248,201 @@ function npInitProjectsFilter() {
   npRenderProjects("all");
 }
 
-function npInitCarouselNav() {
-  const track = document.getElementById("np-projects-track");
-  const prev = document.getElementById("np-carousel-prev");
-  const next = document.getElementById("np-carousel-next");
-  if (!track || !prev || !next) return;
+/* Sliding carousel: pages by `perView` items at a time, loops at the ends,
+   and shows one dot per page so it scales cleanly as more projects are added. */
+const npCarousel = {
+  wrap: null,
+  track: null,
+  dotsEl: null,
+  prevBtn: null,
+  nextBtn: null,
+  index: 0,
+  maxIndex: 0,
+  perView: 1,
+  gap: 16,
+  autoplayTimer: null,
+};
 
-  const step = () => (track.firstElementChild ? track.firstElementChild.getBoundingClientRect().width + 16 : 300);
-  prev.addEventListener("click", () => track.scrollBy({ left: -step(), behavior: "smooth" }));
-  next.addEventListener("click", () => track.scrollBy({ left: step(), behavior: "smooth" }));
+function npCarouselItemsPerView() {
+  const w = window.innerWidth;
+  if (w >= 1024) return 3;
+  if (w >= 768) return 2;
+  return 1;
+}
+
+function npCarouselLayout() {
+  const { wrap, track } = npCarousel;
+  if (!wrap || !track) return;
+  const items = Array.from(track.children);
+  const total = items.length;
+  npCarousel.perView = npCarouselItemsPerView();
+  if (total === 0) {
+    npCarousel.maxIndex = 0;
+    npCarouselRenderDots();
+    return;
+  }
+  const wrapWidth = wrap.clientWidth;
+  const itemWidth = (wrapWidth - npCarousel.gap * (npCarousel.perView - 1)) / npCarousel.perView;
+  items.forEach((item) => { item.style.flex = `0 0 ${itemWidth}px`; });
+  npCarousel.maxIndex = Math.max(0, total - npCarousel.perView);
+  if (npCarousel.index > npCarousel.maxIndex) npCarousel.index = npCarousel.maxIndex;
+  npCarouselRenderDots();
+  npCarouselGoTo(npCarousel.index, false);
+}
+
+function npCarouselRenderDots() {
+  const { dotsEl, track, perView } = npCarousel;
+  if (!dotsEl) return;
+  const total = track.children.length;
+  const pageCount = Math.max(1, Math.ceil(total / perView));
+  dotsEl.innerHTML = Array.from({ length: pageCount }, (_, i) =>
+    `<button class="np-dot" data-page="${i}" aria-label="Go to slide ${i + 1}"></button>`
+  ).join("");
+  dotsEl.querySelectorAll(".np-dot").forEach((dot) => {
+    dot.addEventListener("click", () => {
+      npCarouselGoTo(Number(dot.dataset.page) * perView);
+      npCarouselResetAutoplay();
+    });
+  });
+  npCarouselUpdateDots();
+}
+
+function npCarouselUpdateDots() {
+  const { dotsEl, perView, index } = npCarousel;
+  if (!dotsEl) return;
+  const activePage = Math.round(index / perView);
+  dotsEl.querySelectorAll(".np-dot").forEach((dot, i) => {
+    dot.classList.toggle("np-active", i === activePage);
+  });
+}
+
+function npCarouselGoTo(index, animate = true) {
+  const { track, maxIndex, gap } = npCarousel;
+  if (!track) return;
+  index = Math.max(0, Math.min(index, maxIndex));
+  npCarousel.index = index;
+  const firstItem = track.children[0];
+  const itemWidth = firstItem ? firstItem.getBoundingClientRect().width : 0;
+  const offset = index * (itemWidth + gap);
+  track.style.transition = animate ? "transform 0.5s ease" : "none";
+  track.style.transform = `translateX(-${offset}px)`;
+  npCarouselUpdateDots();
+}
+
+function npCarouselNext() {
+  const { index, perView, maxIndex } = npCarousel;
+  npCarouselGoTo(index + perView > maxIndex ? 0 : index + perView);
+}
+
+function npCarouselPrev() {
+  const { index, perView, maxIndex } = npCarousel;
+  npCarouselGoTo(index - perView < 0 ? maxIndex : index - perView);
+}
+
+function npCarouselResetAutoplay() {
+  clearInterval(npCarousel.autoplayTimer);
+  npCarousel.autoplayTimer = setInterval(npCarouselNext, 5000);
+}
+
+function npCarouselOnContentChange() {
+  npCarousel.index = 0;
+  npCarouselLayout();
+  npCarouselResetAutoplay();
+}
+
+function npInitCarouselNav() {
+  npCarousel.wrap = document.querySelector(".np-carousel-wrap");
+  npCarousel.track = document.getElementById("np-projects-track");
+  npCarousel.dotsEl = document.getElementById("np-carousel-dots");
+  npCarousel.prevBtn = document.getElementById("np-carousel-prev");
+  npCarousel.nextBtn = document.getElementById("np-carousel-next");
+  if (!npCarousel.wrap || !npCarousel.track) return;
+
+  npCarousel.prevBtn.addEventListener("click", () => { npCarouselPrev(); npCarouselResetAutoplay(); });
+  npCarousel.nextBtn.addEventListener("click", () => { npCarouselNext(); npCarouselResetAutoplay(); });
+
+  npCarousel.wrap.addEventListener("mouseenter", () => clearInterval(npCarousel.autoplayTimer));
+  npCarousel.wrap.addEventListener("mouseleave", () => npCarouselResetAutoplay());
+  npCarousel.wrap.addEventListener("touchstart", () => clearInterval(npCarousel.autoplayTimer), { passive: true });
+  npCarousel.wrap.addEventListener("touchend", () => npCarouselResetAutoplay());
+
+  npCarouselLayout();
+
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(npCarouselLayout, 150);
+  });
+}
+
+function npInitNavToggle() {
+  const toggle = document.getElementById("np-nav-toggle");
+  const list = document.querySelector(".np-nav-list");
+  const icon = toggle ? toggle.querySelector("i") : null;
+  if (!toggle || !list) return;
+
+  // Mutate the existing icon's classes instead of replacing it via innerHTML —
+  // swapping the node out would orphan it mid-click, so the document-level
+  // "click outside" listener below would see e.target as no longer inside
+  // `toggle` and immediately close the menu that was just opened.
+  const closeMenu = () => {
+    list.classList.remove("np-open");
+    toggle.setAttribute("aria-expanded", "false");
+    if (icon) { icon.classList.remove("fa-times"); icon.classList.add("fa-bars"); }
+  };
+  const openMenu = () => {
+    list.classList.add("np-open");
+    toggle.setAttribute("aria-expanded", "true");
+    if (icon) { icon.classList.remove("fa-bars"); icon.classList.add("fa-times"); }
+  };
+
+  toggle.addEventListener("click", () => {
+    list.classList.contains("np-open") ? closeMenu() : openMenu();
+  });
+  list.querySelectorAll(".np-nav-link").forEach((link) => link.addEventListener("click", closeMenu));
+  document.addEventListener("click", (e) => {
+    if (!list.classList.contains("np-open")) return;
+    if (!list.contains(e.target) && !toggle.contains(e.target)) closeMenu();
+  });
+}
+
+function npInitReveal() {
+  const items = document.querySelectorAll(".np-reveal");
+  if (!items.length) return;
+  if (!("IntersectionObserver" in window)) {
+    items.forEach((el) => el.classList.add("np-in-view"));
+    return;
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("np-in-view");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+  items.forEach((el) => observer.observe(el));
+}
+
+function npInitScrollTopButton() {
+  const btn = document.getElementById("np-scroll-top");
+  if (!btn) return;
+  const footer = document.querySelector(".np-footer");
+  let footerVisible = false;
+
+  const updateVisibility = () => {
+    btn.classList.toggle("np-visible", window.scrollY > 400 && !footerVisible);
+  };
+
+  if (footer && "IntersectionObserver" in window) {
+    new IntersectionObserver((entries) => {
+      footerVisible = entries[0].isIntersecting;
+      updateVisibility();
+    }).observe(footer);
+  }
+
+  window.addEventListener("scroll", updateVisibility);
+  btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 }
 
 function npInitContactForm() {
@@ -280,15 +466,50 @@ function npInitFooter() {
   }
 }
 
+/* =========================================================================
+   Secret project hub (hub.html) — not linked from the main nav. A single
+   place to maintain redirect links out to other project sites; add an
+   entry here and it shows up as a card, no HTML editing required.
+   ========================================================================= */
+
+const hubLinks = [
+  { name: "Portfolio Home", url: "../index.html", description: "The public-facing portfolio homepage.", icon: "fa-home" },
+  { name: "Certifications", url: "../certificate.html", description: "Certifications and training records.", icon: "fa-certificate" },
+  { name: "ShomeTech", url: "https://www.techie499.com/2018/12/shometech-know-your-number.html", description: "Number-type identification tool.", icon: "fa-desktop" },
+  { name: "GitHub", url: "https://github.com/soumya-shome", description: "Source code and repositories.", icon: "fa-github" },
+];
+
+function hubRenderLinks() {
+  const grid = document.getElementById("hub-links-grid");
+  if (!grid) return;
+  grid.innerHTML = hubLinks.map((link) => {
+    const external = /^https?:\/\//.test(link.url);
+    const iconClass = link.icon === "fa-github" ? "fab" : "fas";
+    return `
+    <a class="hub-card" href="${link.url}" ${external ? 'target="_blank" rel="noopener noreferrer"' : ""}>
+      <div class="hub-card-icon"><i class="${iconClass} ${link.icon}"></i></div>
+      <div>
+        <h3>${npEscapeHtml(link.name)}</h3>
+        <p>${npEscapeHtml(link.description)}</p>
+      </div>
+      <i class="fas fa-arrow-right hub-card-arrow"></i>
+    </a>`;
+  }).join("");
+}
+
 function npInit() {
   npInitLoader();
   npInitNavbarScroll();
+  npInitNavToggle();
   npInitScrollButtons();
   npInitSkillsFilter();
-  npInitProjectsFilter();
   npInitCarouselNav();
+  npInitProjectsFilter();
   npInitContactForm();
   npInitFooter();
+  npInitReveal();
+  npInitScrollTopButton();
+  hubRenderLinks();
 }
 
 if (document.readyState === "loading") {
