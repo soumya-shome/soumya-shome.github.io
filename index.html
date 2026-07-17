@@ -1,180 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>Portfolio</title>
-  <link rel="stylesheet" href="css/css.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.14.0/devicon.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soumyadeep Shome | Full Stack &amp; IoT Developer</title>
+  <meta name="description" content="Portfolio of Soumyadeep Shome, Full Stack & IoT Developer." />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="css/css.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script src="JS/index.js"></script>
 </head>
+<body class="np-page">
 
-<body onload="onLo()">
-  <header>
-    <nav class="navbar sticky">
-      <div class="content">
-        <div class="logo">
-          <a href="index.html">My Portfolio</a>
-        </div>
-        <ul class="menu-list">
-          <div class="icon cancel-btn">
-            <i class="fas fa-times"></i>
-          </div>
-          <li><a href="#about" >About Me</a></li>
-          <li><a href="#projects" >Projects</a></li>
-          <li><a href="#contact" >Contact</a></li>
+  <div id="np-loading" class="np-loading">
+    <div class="np-loading-text np-gradient-text">Loading...</div>
+  </div>
+
+  <div class="np-bg-wireframe"></div>
+  <div class="np-bg-gradient"></div>
+
+  <header id="np-navbar" class="np-navbar">
+    <div class="np-container">
+      <a href="#home" class="np-logo"><span class="np-gradient-text">JD</span></a>
+      <nav>
+        <ul class="np-nav-list">
+          <li><button class="np-nav-link" data-section="home">Home</button></li>
+          <li><button class="np-nav-link" data-section="about">About</button></li>
+          <li><button class="np-nav-link" data-section="skills">Skills</button></li>
+          <li><button class="np-nav-link" data-section="projects">Projects</button></li>
+          <li><button class="np-nav-link" data-section="contact">Contact</button></li>
         </ul>
-        <div class="icon menu-btn">
-          <i class="fas fa-bars" onclick="navb()"></i>
-        </div>
-      </div>
-    </nav>
+      </nav>
+      <button id="np-nav-toggle" class="np-nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
   </header>
- 
-  <section id="hero" style="padding-top: 80px; margin-top: 0px;">
-    <div class="hero-text">
-      <h2>Hello, I'm Soumyadeep Shome</h2>
-      <h3>A Software Developer</h3>
+
+  <section id="home" class="np-hero np-section">
+    <div class="np-container">
+      <div class="np-hero-grid">
+        <div class="np-hero-copy np-reveal">
+          <p class="np-hero-greeting">Hello, I am</p>
+          <h1 class="np-hero-name"><span class="np-gradient-text">Soumyadeep Shome</span></h1>
+          <h2 class="np-hero-role">Full Stack &amp; IoT Developer</h2>
+          <div class="np-hero-actions">
+            <button class="np-btn" data-np-scroll-to="projects">View Projects</button>
+            <button class="np-btn np-btn-outline" data-np-scroll-to="contact">Contact Me</button>
+          </div>
+        </div>
+
+        <div class="np-hero-photo-wrap np-reveal">
+          <div class="np-hero-photo">
+            <img src="Images/profile.jpg" alt="Developer" />
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="hero-image">
-      <img src="Images/profile.jpg" alt="Your photo">
-    </div>
-    <div class="hero-content">
-        <h1>Welcome to my portfolio</h1>
+
+    <div class="np-hero-bg">
+      <div class="np-floating-circle np-circle-1"></div>
+      <div class="np-floating-circle np-circle-2"></div>
+      <div class="np-floating-circle np-circle-3"></div>
     </div>
   </section>
 
-  <section id="about">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <h2>About Me</h2>
-          <p>Hi there! I'm Soumyadeep Shome, a software engineer with a passion for innovation. With a broad skill set in various programming languages and technologies, I love taking on complex challenges and delivering scalable solutions that exceed expectations. Let's work together to create something amazing!</p>
-          <ul class="social-icons">
-            <li><a href="https://github.com/soumya-shome" target="_blank"><i class="fab fa-github fa-3x" aria-hidden="true"></i></a></li>
-            <li><a href="https://www.linkedin.com/in/soumya-shome/" target="_blank"><i class="fab fa-linkedin fa-3x"></i></a></li>
-            <li><a href="https://www.instagram.com/techie499/" target="_blank"><i class="fab fa-instagram fa-3x"></i></a></li>
-            <li><a href="https://www.youtube.com/c/Techie499yt" target="_blank"><i class="fab fa-youtube fa-3x"></i></a></li>
-            <li><a href="https://twitter.com/username" target="_blank"><i class="fab fa-twitter fa-3x"></i></a></li>
-            <li><a href="https://www.hackerrank.com/soumya_shome" target="_blank"><i class="fab fa-hackerrank fa-3x"></i></a></li>
-            <li><a href="https://www.facebook.com/techie499" target="_blank"><i class="fab fa-facebook fa-3x"></i></a></li>
-          </ul>
-        </div>  
-        <div class="col-md-6">
-          <h2>Skills</h2>
-          <ul class="coding-icons">
-            <li>
-              <div><i class="fab fa-java"></i><span>Java</span></div>
-            </li>
-            <li>
-              <div><i class="fab fa-python"></i><span>Python</span></div>
-            </li>
-            <li>
-              <div><i class="devicon-c-plain"></i><span>C</span></div>
-            </li>
-            <li>
-              <div><i class="devicon-cplusplus-plain"></i><span>C++</span></div>
-            </li>
-            <li>
-              <div><i class="fab fa-php"></i><span>PHP</span></div>
-            </li>
-            <li>
-              <div><i class="fab fa-html5"></i><span>HTML</span></div>
-            </li>
-            <li>
-              <div><i class="fab fa-css3"></i><span>CSS</span></div>
-            </li>
-            <li>
-              <div><i class="fab fa-js"></i><span>JavaScript</span></div>
-            </li>
-            <li>
-              <div><i class="devicon-arduino-plain"></i><span>Arduino</span></div>
-            </li>
-          </ul>
+  <section id="about" class="np-section">
+    <div class="np-container">
+      <div class="np-heading np-reveal">
+        <h2>About Me</h2>
+        <div class="np-heading-rule"></div>
+      </div>
+
+      <div class="np-about-grid">
+        <div class="np-about-copy np-reveal">
+          <h3>Who I am</h3>
+          <p>
+            Hi there! I'm Soumyadeep Shome, a software engineer with a passion for innovation. With a broad
+            skill set in various programming languages and technologies, I love taking on complex challenges
+            and delivering scalable solutions that exceed expectations. Let's work together to create
+            something amazing!
+          </p>
+          <div>
+            <button class="np-btn">Download Resume</button>
+          </div>
         </div>
-        <div class="cert-btn col-md-6">
-          <a href="https://drive.google.com/file/d/1fkzhVEgEtqYStUOF0Z1wV2ZvUotjsgaw/view?usp=share_link" class="btn btn-primary">View my Resume</a>
-         
-          <a href="certificate.html" class="btn btn-primary">View my Certifications</a>
+
+        <div class="np-about-card np-reveal">
+          <div class="np-about-fields">
+            <div>
+              <h4>Name</h4>
+              <p>Soumyadeep Shome</p>
+            </div>
+            <div>
+              <h4>Email</h4>
+              <p>soumyadeepshome99@gmail.com</p>
+            </div>
+            <div>
+              <h4>Location</h4>
+              <p>Kolkata, West Bengal, India</p>
+            </div>
+            <div>
+              <h4>Experience</h4>
+              <p>5+ Years</p>
+            </div>
+          </div>
+
+          <div class="np-social-row" style="margin-top:1.5rem;">
+            <h4 style="width:100%;font-size:1.125rem;font-weight:500;margin-bottom:0.5rem;color:#fff;">Connect with me</h4>
+            <a href="https://github.com/" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" title="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://codepen.io/" target="_blank" rel="noopener noreferrer" title="CodePen"><i class="fab fa-codepen"></i></a>
+            <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
         </div>
       </div>
     </div>
   </section>
-  
-  <section id="projects" class="section">
-    <div class="container">
-      <h2>Software Projects</h2>
-      <ul class="projects-grid">
-        <li>
-          <div class="project-tile">
-            <img src="Images/2024-02-25_01-54-36.jpg" alt="ShomeTech">
-            <h3>Calculator</h3>
-            <p>The Basic Java Calculator is a beginner-friendly project that helps you build a simple calculator using Java. This calculator lets users add, subtract, multiply, and divide numbers effortlessly. </p>
-            <br/><a href="https://www.techie499.com/2018/12/shometech-know-your-number.html"><b>View More</b></a>
-          </div>
-        </li>
-        <li>
-          <div class="project-tile">
-            <img src="Images/project3.png" alt="ShomeTech">
-            <h3>ShomeTech</h3>
-            <p>The App or Tool will help you to deal with the different Types of numbers you might deal with in the programming world.</p>
-            <br/><a href="https://www.techie499.com/2018/12/shometech-know-your-number.html"><b>View More</b></a>
-          </div>
-        </li>
-        <li>
-          <div class="project-tile">
-            <img src="Images/Screenshot 2024-02-25 015716.png" alt="Online Exam Center">
-            <h3>Online Exam Center</h3>
-            <p>Description</p>
-          </div>
-        </li>
-      </ul>
+
+  <section id="skills" class="np-section np-skills-section">
+    <div class="np-container">
+      <div class="np-heading np-reveal">
+        <h2>My Skills</h2>
+        <div class="np-heading-rule" style="background:#fff;"></div>
+      </div>
+
+      <div id="np-skills-filters" class="np-filter-row">
+        <button class="np-filter-btn np-active" data-filter="all">All</button>
+        <button class="np-filter-btn" data-filter="frontend">Frontend</button>
+        <button class="np-filter-btn" data-filter="backend">Backend</button>
+        <button class="np-filter-btn" data-filter="tools">Tools</button>
+        <button class="np-filter-btn" data-filter="other">Other</button>
+      </div>
+
+      <div id="np-skills-grid" class="np-skills-grid"></div>
     </div>
   </section>
 
-  <section id="projects" class="section">
-    <div class="container">
-      <h2>Electronics Projects</h2>
-      <ul class="projects-grid">
-        <li>
-          <div class="project-tile">
-            <img src="Images/project.png" alt="RFID Door Lock">
-            <h3>RFID Door Lock</h3>
-            <p>RFID Door Lock is a low-cost, secure, and easy-to-install DIY project using an Arduino board and an RFID reader that enables users to control door locks by reading RFID tags.</p>
-            <br/><a href="https://www.techie499.com/2023/03/RFIDDoorLock.html"><b>View More</b></a>
-          </div>
-        </li>
-        <li>
-          <div class="project-tile">
-            <img src="Images/project2.png" alt="IoT Mini Clock">
-            <h3>IoT Mini Clock</h3>
-            <p>A mini clock project that utilizes ESP01 and TM1637 Display to display Internet Time in a compact and convenient manner.</p>
-          </div>
-        </li>
-      </ul>
+  <section id="projects" class="np-section">
+    <div class="np-container">
+      <div class="np-heading np-reveal">
+        <h2>My Projects</h2>
+        <div class="np-heading-rule" style="background:#fff;"></div>
+      </div>
+
+      <div id="np-projects-filters" class="np-filter-row np-projects-filter" style="justify-content:center;">
+        <button class="np-filter-btn np-active" data-filter="all">All</button>
+        <button class="np-filter-btn" data-filter="fullstack">Fullstack</button>
+        <button class="np-filter-btn" data-filter="iot">Iot</button>
+        <button class="np-filter-btn" data-filter="electronics">Electronics</button>
+      </div>
+
+      <div class="np-carousel-wrap">
+        <div class="np-carousel-viewport">
+          <div id="np-projects-track" class="np-carousel-track"></div>
+        </div>
+        <button id="np-carousel-prev" class="np-carousel-btn np-carousel-prev" aria-label="Previous project"><i class="fas fa-chevron-left"></i></button>
+        <button id="np-carousel-next" class="np-carousel-btn np-carousel-next" aria-label="Next project"><i class="fas fa-chevron-right"></i></button>
+      </div>
+      <div id="np-carousel-dots" class="np-carousel-dots"></div>
     </div>
   </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <div class="contact-form">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" required>
+  <section id="contact" class="np-section np-contact-section">
+    <div class="np-container">
+      <div class="np-heading np-reveal">
+        <h2>Get In Touch</h2>
+        <div class="np-heading-rule"></div>
+      </div>
 
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
+      <div class="np-contact-grid">
+        <div class="np-reveal">
+          <div class="np-contact-info">
+            <h3>Contact Information</h3>
 
-        <label for="message">Message</label>
-        <textarea id="message" name="message" required></textarea>
-        
-        <button onclick="sendMail()">Send Message</button>
+            <div class="np-contact-item">
+              <div class="np-contact-icon"><i class="fas fa-envelope"></i></div>
+              <div>
+                <p>Email</p>
+                <a href="mailto:soumyadeepshome99@gmail.com">john@example.com</a>
+              </div>
+            </div>
+
+            <div class="np-contact-item">
+              <div class="np-contact-icon"><i class="fas fa-phone"></i></div>
+              <div>
+                <p>Phone</p>
+                <a href="tel:+919804359379">+1 (234) 567-890</a>
+              </div>
+            </div>
+
+            <div class="np-contact-item">
+              <div class="np-contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div>
+                <p>Location</p>
+                <p style="color:hsl(var(--np-foreground));">Kolkata, West Bengal, India</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="np-profiles">
+            <h3>Profiles</h3>
+            <div class="np-profiles-row">
+              <a href="https://github.com/soumya-shome" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/soumya-shome/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+              <a href="https://www.instagram.com/techie499/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="np-form np-reveal">
+          <h3>Send Me a Message</h3>
+          <form id="np-contact-form">
+            <div class="np-form-row">
+              <div>
+                <label for="np-name">Name</label>
+                <input id="np-name" class="np-input" placeholder="Your Name" required />
+              </div>
+              <div>
+                <label for="np-email">Email</label>
+                <input id="np-email" type="email" class="np-input" placeholder="Your Email" required />
+              </div>
+            </div>
+            <div class="np-form-group">
+              <label for="np-subject">Subject</label>
+              <input id="np-subject" class="np-input" placeholder="Subject" required />
+            </div>
+            <div class="np-form-group">
+              <label for="np-message">Message</label>
+              <textarea id="np-message" class="np-textarea" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="np-btn np-btn-block">Send Message</button>
+          </form>
+        </div>
+      </div>
     </div>
   </section>
 
-  <footer>
-    <p>&copy; 2022 Soumyadeep Shome. All rights reserved.</p>
+  <footer class="np-footer">
+    <div class="np-container">
+      <div class="np-footer-logo np-gradient-text">JD</div>
+      <div class="np-footer-copy">&copy; <span id="np-footer-year"></span> John Developer. All rights reserved.</div>
+      <button id="np-footer-top" class="np-footer-top">Back to Top ↑</button>
+    </div>
   </footer>
+
+  <button id="np-scroll-top" class="np-scroll-top-fab" aria-label="Scroll to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script src="JS/index.js"></script>
 </body>
 </html>
