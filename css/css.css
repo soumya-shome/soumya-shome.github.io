@@ -572,7 +572,8 @@
 }
 
 /* Reset generic tag rules from the legacy stylesheet within the new page */
-.np-page a { color: inherit; text-decoration: none; }
+.np-page a { text-decoration: none; }
+.np-page a:not(.np-btn) { color: inherit; }
 .np-page header { background: transparent; color: inherit; }
 .np-page section { width: auto; margin: 0; border-radius: 0; box-shadow: none; }
 .np-page ul { list-style: none; margin: 0; padding: 0; }
