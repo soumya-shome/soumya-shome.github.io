@@ -1,0 +1,53 @@
+name: Deploy static site to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "static/**"
+      - "css/**"
+      - "JS/**"
+      - "Images/**"
+      - "public/**"
+      - ".github/workflows/deploy-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Assemble Pages site
+        run: |
+          mkdir -p _site
+          # static/index.html uses "../" paths so it also works opened directly
+          # from the static/ folder; strip that prefix since it becomes the
+          # site root here (siblings css/, JS/, Images/, public/ live next to it).
+          sed 's#\.\./##g' static/index.html > _site/index.html
+          cp -r css _site/css
+          cp -r JS _site/JS
+          cp -r Images _site/Images
+          cp -r public _site/public
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
