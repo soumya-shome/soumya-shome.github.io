@@ -487,7 +487,13 @@ function npInitContactForm() {
         if (!res.ok) throw new Error(`FormSubmit responded with ${res.status}`);
         return res.json();
       })
-      .then(() => {
+      .then((data) => {
+        // FormSubmit can return HTTP 200 with success:"false" (a string, not
+        // a boolean) in the body on a logical failure, so the HTTP status
+        // alone isn't enough to tell success from failure.
+        if (data.success === "false" || data.success === false) {
+          throw new Error(data.message || "FormSubmit reported failure");
+        }
         alert("Thank you for your message! I'll get back to you soon.");
         form.reset();
       })
