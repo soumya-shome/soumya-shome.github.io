@@ -5,7 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Soumyadeep Shome | Full Stack &amp; IoT Developer</title>
   <meta name="description" content="Portfolio of Soumyadeep Shome, Full Stack & IoT Developer." />
-  <link rel="icon" href="favicon.ico" />
+  <script>
+    (function () {
+      var stored = localStorage.getItem("np-theme");
+      var theme = stored || (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="alternate icon" href="favicon.ico" />
   <link rel="stylesheet" href="css/css.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 </head>
@@ -21,18 +29,23 @@
   <header id="np-navbar" class="np-navbar">
     <div class="np-container">
       <a href="#home" class="np-logo"><span class="np-gradient-text">SS</span></a>
-      <nav>
-        <ul class="np-nav-list">
-          <li><button class="np-nav-link" data-section="home">Home</button></li>
-          <li><button class="np-nav-link" data-section="about">About</button></li>
-          <li><button class="np-nav-link" data-section="skills">Skills</button></li>
-          <li><button class="np-nav-link" data-section="projects">Projects</button></li>
-          <li><button class="np-nav-link" data-section="contact">Contact</button></li>
-        </ul>
-      </nav>
-      <button id="np-nav-toggle" class="np-nav-toggle" aria-label="Toggle menu" aria-expanded="false">
-        <i class="fas fa-bars"></i>
-      </button>
+      <div class="np-navbar-right">
+        <nav>
+          <ul class="np-nav-list">
+            <li><button class="np-nav-link" data-section="home">Home</button></li>
+            <li><button class="np-nav-link" data-section="about">About</button></li>
+            <li><button class="np-nav-link" data-section="skills">Skills</button></li>
+            <li><button class="np-nav-link" data-section="projects">Projects</button></li>
+            <li><button class="np-nav-link" data-section="contact">Contact</button></li>
+          </ul>
+        </nav>
+        <button id="np-theme-toggle" class="np-theme-toggle" aria-label="Toggle light/dark theme">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button id="np-nav-toggle" class="np-nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -106,7 +119,7 @@
           </div>
 
           <div class="np-social-row" style="margin-top:1.5rem;">
-            <h4 style="width:100%;font-size:1.125rem;font-weight:500;margin-bottom:0.5rem;color:#fff;">Connect with me</h4>
+            <h4 style="width:100%;font-size:1.125rem;font-weight:500;margin-bottom:0.5rem;color:hsl(var(--np-foreground));">Connect with me</h4>
             <a href="https://github.com/" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
             <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
             <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" title="Twitter"><i class="fab fa-twitter"></i></a>
@@ -122,7 +135,7 @@
     <div class="np-container">
       <div class="np-heading np-reveal">
         <h2>My Skills</h2>
-        <div class="np-heading-rule" style="background:#fff;"></div>
+        <div class="np-heading-rule"></div>
       </div>
 
       <div id="np-skills-filters" class="np-filter-row">
@@ -141,7 +154,7 @@
     <div class="np-container">
       <div class="np-heading np-reveal">
         <h2>My Projects</h2>
-        <div class="np-heading-rule" style="background:#fff;"></div>
+        <div class="np-heading-rule"></div>
       </div>
 
       <div id="np-projects-filters" class="np-filter-row np-projects-filter" style="justify-content:center;">
@@ -239,9 +252,37 @@
 
   <footer class="np-footer">
     <div class="np-container">
-      <div class="np-footer-logo np-gradient-text">SS</div>
-      <div class="np-footer-copy">&copy; <span id="np-footer-year"></span> John Developer. All rights reserved.</div>
-      <button id="np-footer-top" class="np-footer-top">Back to Top ↑</button>
+      <div class="np-footer-grid">
+        <div class="np-footer-brand">
+          <div class="np-footer-logo np-gradient-text">SS</div>
+          <p>Full Stack &amp; IoT Developer building things that live beyond the screen.</p>
+        </div>
+
+        <div class="np-footer-col">
+          <h4>Quick Links</h4>
+          <ul class="np-footer-links">
+            <li><button class="np-footer-link" data-np-scroll-to="home">Home</button></li>
+            <li><button class="np-footer-link" data-np-scroll-to="about">About</button></li>
+            <li><button class="np-footer-link" data-np-scroll-to="skills">Skills</button></li>
+            <li><button class="np-footer-link" data-np-scroll-to="projects">Projects</button></li>
+            <li><button class="np-footer-link" data-np-scroll-to="contact">Contact</button></li>
+          </ul>
+        </div>
+
+        <div class="np-footer-col">
+          <h4>Connect</h4>
+          <div class="np-footer-social">
+            <a href="https://github.com/soumya-shome" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/soumya-shome/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/techie499/" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="np-footer-bottom">
+        <div class="np-footer-copy">&copy; <span id="np-footer-year"></span> Soumyadeep Shome. All rights reserved.</div>
+        <button id="np-footer-top" class="np-footer-top">Back to Top ↑</button>
+      </div>
     </div>
   </footer>
 

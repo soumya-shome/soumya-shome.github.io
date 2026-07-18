@@ -375,6 +375,28 @@ function npInitCarouselNav() {
   });
 }
 
+function npInitThemeToggle() {
+  const btn = document.getElementById("np-theme-toggle");
+  if (!btn) return;
+  const icon = btn.querySelector("i");
+
+  const applyIcon = (theme) => {
+    if (!icon) return;
+    icon.classList.remove("fa-sun", "fa-moon");
+    icon.classList.add(theme === "light" ? "fa-sun" : "fa-moon");
+  };
+
+  applyIcon(document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark");
+
+  btn.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+    const next = current === "light" ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("np-theme", next);
+    applyIcon(next);
+  });
+}
+
 function npInitNavToggle() {
   const toggle = document.getElementById("np-nav-toggle");
   const list = document.querySelector(".np-nav-list");
@@ -455,7 +477,9 @@ function npInitContactForm() {
   const form = document.getElementById("np-contact-form");
   if (!form) return;
 
-  const CONTACT_EMAIL = "soumyadeepshome99@gmail.com";
+  // FormSubmit's activation ID for this form, used in place of a plaintext
+  // address so it doesn't sit exposed in public view-source as scraper bait.
+  const CONTACT_EMAIL = "b36700547b203a9104689facc4ab2679";
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -552,6 +576,7 @@ function hubRenderLinks() {
 function npInit() {
   npInitLoader();
   npInitNavbarScroll();
+  npInitThemeToggle();
   npInitNavToggle();
   npInitScrollButtons();
   npInitSkillsFilter();
