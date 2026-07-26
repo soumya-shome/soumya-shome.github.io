@@ -22,14 +22,87 @@
   <div class="np-bg-wireframe"></div>
   <div class="np-bg-gradient"></div>
 
-  <div class="hub-wrap">
-    <div class="hub-header">
-      <h1 class="np-gradient-text">Project Hub</h1>
-      <p>Quick links out to everything I've built and deployed.</p>
+  <header id="np-navbar" class="np-navbar">
+    <div class="np-container">
+      <a href="../index.html" class="np-logo"><span class="np-gradient-text">SS</span></a>
+      <div class="np-navbar-right">
+        <nav>
+          <ul class="np-nav-list">
+            <li><button class="np-nav-link" data-section="learnings">Learnings</button></li>
+            <li><button class="np-nav-link" data-section="trackers">Trackers</button></li>
+            <li><button class="np-nav-link" data-section="projects">Projects</button></li>
+            <li><button class="np-nav-link" data-section="repository">Repository</button></li>
+            <li><button class="np-nav-link" data-section="portals">Portals</button></li>
+          </ul>
+        </nav>
+        <button id="np-theme-toggle" class="np-theme-toggle" aria-label="Toggle light/dark theme">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button id="np-nav-toggle" class="np-nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
     </div>
+  </header>
 
-    <div id="hub-links-grid" class="hub-grid"></div>
+  <div class="hub-header np-section" style="padding-bottom: 0;">
+    <div class="np-container">
+      <h1 class="np-gradient-text">Project Hub</h1>
+      <p>Quick links out to everything I've built, tracked, and learned.</p>
+    </div>
+  </div>
 
+  <section id="learnings" class="np-section">
+    <div class="np-container">
+      <div class="np-heading np-reveal">
+        <h2>Learnings</h2>
+        <div class="np-heading-rule"></div>
+      </div>
+      <div id="hub-learnings-grid" class="hub-grid"></div>
+    </div>
+  </section>
+
+  <section id="trackers" class="np-section">
+    <div class="np-container">
+      <div class="np-heading np-reveal">
+        <h2>Trackers</h2>
+        <div class="np-heading-rule"></div>
+      </div>
+      <div id="hub-trackers-grid" class="hub-grid"></div>
+    </div>
+  </section>
+
+  <section id="projects" class="np-section">
+    <div class="np-container">
+      <div class="np-heading np-reveal">
+        <h2>Projects</h2>
+        <div class="np-heading-rule"></div>
+      </div>
+      <div id="hub-projects-grid" class="hub-grid"></div>
+    </div>
+  </section>
+
+  <section id="repository" class="np-section">
+    <div class="np-container">
+      <div class="np-heading np-reveal">
+        <h2>Repository</h2>
+        <div class="np-heading-rule"></div>
+      </div>
+      <div id="hub-repository-grid" class="hub-grid"></div>
+    </div>
+  </section>
+
+  <section id="portals" class="np-section">
+    <div class="np-container">
+      <div class="np-heading np-reveal">
+        <h2>Portals</h2>
+        <div class="np-heading-rule"></div>
+      </div>
+      <div id="hub-portals-grid" class="hub-grid"></div>
+    </div>
+  </section>
+
+  <div class="np-container">
     <a href="../index.html" class="hub-back">&larr; Back to portfolio</a>
   </div>
 

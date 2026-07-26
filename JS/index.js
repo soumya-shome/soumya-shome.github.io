@@ -543,25 +543,53 @@ function npInitFooter() {
 }
 
 /* =========================================================================
-   Secret project hub (hub.html) — not linked from the main nav. A single
-   place to maintain redirect links out to other project sites; add an
-   entry here and it shows up as a card, no HTML editing required.
+   Secret project hub (myhub/index.html) — not linked from the main nav.
+   Three maintained lists, each rendered into its own section; add an entry
+   to the matching array and it shows up as a card, no HTML editing required.
    ========================================================================= */
 
-const hubLinks = [
-  { name: "Portfolio Home", url: "../index.html", description: "The public-facing portfolio homepage.", icon: "fa-home" },
-  { name: "Certifications", url: "../certificate.html", description: "Certifications and training records.", icon: "fa-certificate" },
+const HUB_BRAND_ICONS = ["fa-github", "fa-linkedin", "fa-twitter", "fa-instagram", "fa-codepen", "fa-facebook"];
+
+const hubLearnings = [
+  { name: "LeetCode", url: "https://leetcode.com/u/soumya-shome/", description: "Problem-solving practice and progress.", icon: "fa-code" },
+  { name: "HackerRank", url: "https://www.hackerrank.com/profile/soumya-shome", description: "Coding challenges and skill certifications.", icon: "fa-terminal" },
+  { name: "Certifications", url: "certificate.html", description: "Certifications and training records.", icon: "fa-certificate" },
+];
+
+const hubTrackers = [
+  // TODO: swap this URL for your actual sheet link.
+  { name: "Tracker Sheet", url: "https://docs.google.com/spreadsheets/d/12do1G6ixs7GTyFAjH3T7Ln1x0bYyTLcb8vovlKfFINs/", description: "Daily Habit spreadsheet.", icon: "fa-table" },
+  { name: "Notion-Projects", url: "https://app.notion.com/p/ff6a9e3c6f934f6db25d0dc59387895e?v=204ee05d7e8a4b20a924d321965b1152", description: "Project Portfolio - Notion", icon: "fa-table" },
+];
+
+const hubProjects = [
   { name: "ShomeTech", url: "https://www.techie499.com/2018/12/shometech-know-your-number.html", description: "Number-type identification tool.", icon: "fa-desktop" },
+  { name: "NanoTools", url: "https://nanotools.vercel.app", description: "A lightweight collection of everyday developer utilities.", icon: "fa-toolbox" },
+  { name: "MedStore", url: "https://medstore-demo.vercel.app", description: "An online medicine store demo with browsing and checkout.", icon: "fa-pills" },
+  { name: "TutionFinder", url: "https://tuitionfinder.vercel.app", description: "A platform to discover and connect with tutors and tuition classes.", icon: "fa-chalkboard-teacher" },
+  { name: "Folio", url: "https://couple-journals.vercel.app", description: "A shared digital journal for couples to capture memories together.", icon: "fa-heart" },
+  { name: "Code-Mentor", url: "https://code-champ-mentor.vercel.app", description: "A mentorship platform connecting learners with coding mentors.", icon: "fa-laptop-code" },
+  { name: "EmberLog", url: "https://emberlogs.vercel.app", description: "A daily logging app for tracking habits and reflections.", icon: "fa-fire" },
+  { name: "FundsTracker", url: "https://fundstracker.vercel.app", description: "A personal finance tracker for managing expenses and budgets.", icon: "fa-wallet" },
+];
+
+const hubRepository = [
   { name: "GitHub", url: "https://github.com/soumya-shome", description: "Source code and repositories.", icon: "fa-github" },
 ];
 
-function hubRenderLinks() {
-  const grid = document.getElementById("hub-links-grid");
-  if (!grid) return;
-  grid.innerHTML = hubLinks.map((link) => {
-    const external = /^https?:\/\//.test(link.url);
-    const iconClass = link.icon === "fa-github" ? "fab" : "fas";
-    return `
+// General service dashboards — add more as you pick up new tools.
+const hubPortals = [
+  { name: "Vercel", url: "https://vercel.com/dashboard", description: "Deployments and hosting dashboard.", icon: "fa-server" },
+  { name: "Notion", url: "https://www.notion.so", description: "Notes, docs, and project workspaces.", icon: "fa-clipboard-list" },
+  { name: "Supabase", url: "https://supabase.com/dashboard/projects", description: "Database and backend projects.", icon: "fa-database" },
+  { name: "NeonDB", url: "https://console.neon.tech", description: "Serverless Postgres database console.", icon: "fa-bolt" },
+  { name: "Meta Business Suite", url: "https://business.facebook.com", description: "Manage Facebook & Instagram business assets.", icon: "fa-facebook" },
+];
+
+function hubCardHtml(link) {
+  const external = /^https?:\/\//.test(link.url);
+  const iconClass = HUB_BRAND_ICONS.includes(link.icon) ? "fab" : "fas";
+  return `
     <a class="hub-card" href="${link.url}" ${external ? 'target="_blank" rel="noopener noreferrer"' : ""}>
       <div class="hub-card-icon"><i class="${iconClass} ${link.icon}"></i></div>
       <div>
@@ -570,7 +598,22 @@ function hubRenderLinks() {
       </div>
       <i class="fas fa-arrow-right hub-card-arrow"></i>
     </a>`;
-  }).join("");
+}
+
+function hubRenderGrid(containerId, links, emptyMessage) {
+  const grid = document.getElementById(containerId);
+  if (!grid) return;
+  grid.innerHTML = links.length
+    ? links.map(hubCardHtml).join("")
+    : `<p class="hub-empty">${npEscapeHtml(emptyMessage)}</p>`;
+}
+
+function hubRenderLinks() {
+  hubRenderGrid("hub-learnings-grid", hubLearnings, "Nothing added yet — check back soon.");
+  hubRenderGrid("hub-trackers-grid", hubTrackers, "Nothing added yet — check back soon.");
+  hubRenderGrid("hub-projects-grid", hubProjects, "Nothing added yet — check back soon.");
+  hubRenderGrid("hub-repository-grid", hubRepository, "Nothing added yet — check back soon.");
+  hubRenderGrid("hub-portals-grid", hubPortals, "Nothing added yet — check back soon.");
 }
 
 function npInit() {

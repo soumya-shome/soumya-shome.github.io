@@ -1153,12 +1153,20 @@
 .np-scroll-top-fab:hover { background-color: hsl(var(--np-primary) / 0.85); }
 
 /* Secret hub page */
-.hub-wrap { max-width: 900px; margin: 0 auto; padding: 4rem 1.5rem; min-height: 100vh; box-sizing: border-box; }
-.hub-header { text-align: center; margin-bottom: 3rem; }
+.hub-header { text-align: center; }
 .hub-header h1 { font-size: clamp(2rem, 4vw + 1rem, 2.75rem); font-weight: 700; margin-bottom: 0.5rem; }
 .hub-header p { color: hsl(var(--np-muted-foreground)); }
 .hub-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
 @media (min-width: 640px) { .hub-grid { grid-template-columns: 1fr 1fr; } }
+.hub-empty {
+  grid-column: 1 / -1;
+  color: hsl(var(--np-muted-foreground));
+  font-size: 0.9rem;
+  padding: 1.5rem;
+  border: 1px dashed hsl(var(--np-border));
+  border-radius: var(--np-radius);
+  text-align: center;
+}
 .hub-card {
   display: flex;
   align-items: center;
@@ -1187,7 +1195,7 @@
 .hub-card-arrow { margin-left: auto; color: hsl(var(--np-muted-foreground)); }
 .hub-back {
   display: inline-block;
-  margin-top: 2.5rem;
+  margin: 1rem 0 3rem;
   color: hsl(var(--np-muted-foreground));
   font-size: 0.875rem;
   transition: color 0.2s;
